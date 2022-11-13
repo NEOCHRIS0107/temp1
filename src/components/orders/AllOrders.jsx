@@ -5,6 +5,7 @@ import "./AllOrders.css";
 
 export default function AllOrders() {
     const [orders, setOrders] = useState([]);
+    const [array, setArray] = useState({});
     const { token } = useUser();
     let navigate = useNavigate();
 
@@ -47,11 +48,11 @@ export default function AllOrders() {
                                             </thead>
                                             {
                                                 orders.map((order) => {
-                                                    const { bookingOrderId, orderDate, transactionMode,quantity,totalCost,couponName,orderType,custId,pizzaList} = order;
+                                                    const { bookingOrderId, orderDate, transactionMode, quantity, totalCost, couponName, orderType, custId, pizzaList } = order;
                                                     return (
                                                         <tbody className='tablebody'>
                                                             <tr>
-                                                                <th scope="row" ><button className="btn btn-primary mx-2 btn-sm" id={custId} onClick={() => navigate("/vieworderdetails")}>{bookingOrderId}</button></th>
+                                                                <th scope="row" ><button className="btn btn-primary mx-2 btn-sm" id={custId} onClick={() => { setArray({ custId, pizzaList, couponName }); console.log(array) }}>{bookingOrderId}</button></th>
                                                                 <td>{orderDate}</td>
                                                                 <td>{transactionMode}</td>
                                                                 <td>{totalCost}</td>
