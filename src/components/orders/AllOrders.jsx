@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from "../../hooks/useUser";
 import "./AllOrders.css";
 
-export default function AllOrders() {
+export default function AllOrders(props) {
     const [orders, setOrders] = useState([]);
-    const [array, setArray] = useState({});
+    const [id, pList, cname] = useState({});
     const { token } = useUser();
     let navigate = useNavigate();
 
@@ -52,7 +52,7 @@ export default function AllOrders() {
                                                     return (
                                                         <tbody className='tablebody'>
                                                             <tr>
-                                                                <th scope="row" ><button className="btn btn-primary mx-2 btn-sm" id={custId} onClick={() => { setArray({ custId, pizzaList, couponName }); console.log(array) }}>{bookingOrderId}</button></th>
+                                                                <th scope="row" ><button className="btn btn-primary mx-2 btn-sm" ><Link to="/vieworderdetails" state={{ id: custId, pList: pizzaList, cName: couponName }}>{bookingOrderId}</Link></button></th>
                                                                 <td>{orderDate}</td>
                                                                 <td>{transactionMode}</td>
                                                                 <td>{totalCost}</td>
@@ -75,3 +75,5 @@ export default function AllOrders() {
         </>
     )
 }
+
+
